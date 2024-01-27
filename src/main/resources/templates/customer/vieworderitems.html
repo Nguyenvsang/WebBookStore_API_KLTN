@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Xem chi tiết đơn hàng</title>
+    <!-- Đường dẫn tới các tệp CSS của Bootstrap -->
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+    <style>
+		
+		body { background-color: #f8f9fa  }
+		
+    	h3 {
+        	text-align: center;
+        	margin-top: 20px;
+        	margin-bottom: 30px;  
+        	color: rgb(2,88,155);     	
+    	}
+    	h4 {
+        	margin-bottom: 20px;  
+        	color: rgb(2,88,155);     	
+    	}
+    	.btn-back {
+			border-radius: 10px;
+			color: white;
+			display: center;
+			margin-top: 20px;
+			text-align: left;
+		}
+		.btn-back:hover {
+			color: rgb(182,232,241)
+		}
+		.frame-main {
+	        border: 2px solid rgb(182,232,241);
+	        border-radius: 5px;
+	        padding: 20px;
+	        border-radius: 15px;
+	        margin-bottom: 30px;
+	    }
+	    
+	    .frame-main-3 {
+	        border: 2px solid rgb(182,232,241);
+	        border-radius: 5px;
+	        padding: 20px;
+	        border-radius: 15px
+	    }
+	    .frame-main-2 {
+	        border: 2px solid rgb(182,232,241);
+	        border-radius: 5px;
+	        padding: 20px;
+	        border-radius: 15px;
+	        margin-bottom: 30px;
+	    }
+	    
+	    .thead-title {
+		    border-radius: 25px;
+		    overflow: hidden;
+		    background-color: rgb(182,232,241);
+			color: black;
+			border-radius: 15px
+		}
+		.thead-title th:first-child {
+		    border-top-left-radius: 15px;
+		}
+		
+		.thead-title th:last-child {
+		    border-top-right-radius: 15px;
+		}
+		
+		tr:last-child td:first-child {
+		    border-bottom-left-radius: 15px;
+		}
+		tr:last-child td:last-child {
+		    border-bottom-right-radius: 15px;
+		}
+		
+		table {
+        	border-collapse: collapse;
+	    }
+	    td {
+	        border: 1px solid rgb(242,242,242);
+	    }
+	    
+	    .container.main {
+			border: 2px ;
+	        border-radius: 5px;	  
+	        border-radius: 15px;	
+	        padding: 15px;
+	        margin-top: 10px;
+	        margin-bottom: 10px;
+		}
+		
+		.frame-main-4 {
+		  background-color: white;
+		  margin-top: 10px;
+		}
+		
+		.navbar-nav {
+			display: frex;
+		}
+		.navbar-nav-left {
+			width: 70%;
+		}
+		.navbar-nav-right {
+			width: 30%;
+		}
+		.nav-link {
+			display: flex;
+      		align-items: center;
+      		column-gap: 0.5rem;
+      		width: fit-content;
+		}
+		.move-right {
+			margin-left: auto;
+			display: flex;
+			float: right;
+		}
+		.material-symbols-outlined{
+			color: rgb(2,88,155);
+		}
+		
+		.container.main {
+			box-shadow: 0 8px 10px rgb(226, 226, 226);
+			
+			margin-top: 20px;
+			margin-bottom: 30px;
+		}
+		
+		.material-symbols-outlined.back {
+			color: rgb(2,88,155);
+		}
+		
+		.material-symbols-outlined.back:hover {
+			color: rgb(182,232,241);
+		}
+		
+		.badge.badge-wait{
+			color: white;
+			background-color: orange;
+		}
+		
+		
+	</style>
+</head>
+<body>
+	<div th:replace="~{layout/header :: header}"></div>
+    <div class="container main" style="background-color: white;">
+		<p class="text">
+            <a href="javascript:history.back()" class="btn btn-back">
+				<span class="material-symbols-outlined back">arrow_back_ios</span>
+			</a>
+        </p>
+		<div class="frame-main-4" style="background-color: white; margin-top: 20px;">
+        	<h3>CHI TIẾT ĐƠN HÀNG</h3>
+		</div>
+	        <div class="frame-main" style="background-color: white;">
+			        <table class="table table-striped">
+						<thead class="thead-title">
+				            <tr style="color: rgb(2,88,155);">
+				                <th class="align-middle text-center">Mã đơn hàng</th>
+				                <th class="align-middle text-center">Ngày đặt</th>
+				                <th class="align-middle text-center">Tổng tiền</th>
+				                <th class="align-middle text-center">Trạng thái</th>
+				            </tr>
+						</thead>
+			            <tr>
+			                <td th:text="${order.id}" class="align-middle text-center"></td>
+			                <td th:text="${#dates.format(order.dateOrder, 'dd/MM/yyyy')}" class="align-middle text-center"></td>
+			                <td th:text="${#numbers.formatInteger(order.totalPrice, 0, 'POINT') + ' đ'}" class="align-middle text-center" style="color: orangered"></td>
+			                <td class="align-middle text-center">
+				                <span th:classappend="${order.status == 0} ? 'badge badge-success' : (${order.status == 1} ? 'badge badge-wait' : (${order.status == 2} ? 'badge badge-primary' : (${order.status == 3} ? 'badge badge-secondary' : '')))" class="align-middle text-center">
+				                    <span th:switch="${order.status}" >
+				                        <span th:case="0" >Chờ xác nhận</span>
+				                        <span th:case="1" >Chờ lấy hàng</span>
+				                        <span th:case="2" >Đang giao</span>
+				                        <span th:case="3" >Đã giao</span>
+				                        <span th:case="*" th:text="'Trạng thái không hợp lệ'" class="align-middle text-center"></span>
+				                    </span>
+				                </span>
+				            </td>
+			            </tr>
+			        </table>
+	            </div>
+        
+        
+        <div class="frame-main-2" style="background-color: white;">
+			<h4>Chi tiết vận chuyển</h4>
+	    	<table class="table table-striped"> 
+				<thead class="thead-title">
+					<tr style="color: rgb(2,88,155);">
+				        <th class="align-middle text-center">Tên</th>
+				        <th class="align-middle text-center">Địa chỉ</th>
+				        <th class="align-middle text-center">Số điện thoại</th>
+				       	<th class="align-middle text-center">Email</th>
+				    </tr> 
+				</thead>
+			    <tr>
+			        <td th:text="${order.name}" class="align-middle text-center"></td>
+			        <td th:text="${order.address}" class="align-middle text-center"></td>
+			        <td th:text="${order.phoneNumber}" class="align-middle text-center"></td>
+			        <td th:text="${order.email}" class="align-middle text-center"></td>		        
+			    </tr>      
+	    	</table>
+        </div>
+        
+        
+        <div class="frame-main-3" style="background-color: white;">
+			<h4>Những món hàng</h4>
+	        <table class="table table-striped">
+	            <thead class="thead-title">
+		            <tr style="color: rgb(2,88,155);">
+		                <th class="align-middle text-center">Tên sách</th>
+		                <th class="align-middle text-center">Số lượng</th>
+		                <th class="align-middle text-center">Giá</th>
+		                <th class="align-middle text-center">Tổng</th>
+		            </tr>
+				</thead>
+	            <tr th:each="orderItem : ${orderItems}">
+	                <td th:text="${orderItem.book.name}" class="align-middle"</td>
+	                <td th:text="${orderItem.quantity}" class="align-middle text-center"></td>
+	                <td th:text="${#numbers.formatInteger(orderItem.book.sellPrice, 0, 'POINT')+ ' đ'}" class="align-middle" style="text-align: center; color: orangered;"></td>
+	                <td th:text="${#numbers.formatInteger(orderItem.price, 0, 'POINT')+ ' đ'}" class="align-middle" style="color: orangered; text-align: center;"></td>
+	            </tr>
+	        </table>
+        </div>       
+        
+    </div>
+    <div th:replace="~{layout/footer :: footer}"></div>
+    <!-- Thêm các tệp tin JavaScript -->
+    <script th:src="@{/js/jquery-3.4.1.slim.min.js}"></script>
+    <script th:src="@{/js/popper.min.js}"></script>
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+</body>
+</html>

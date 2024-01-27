@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Thông tin sách</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <style>
+		
+		body { background-color: #f8f9fa  }
+		
+		h3 {
+        	text-align: center;
+        	margin-top: 0px;
+        	margin-bottom: 20px;  
+        	color: rgb(2,88,155);     	
+    	}
+    	.frame-01 {
+			background-color: white;
+    		border-radius: 20px;
+    		margin-top: 20px;
+		}
+		.frame-02 {			
+			margin-top: 20px;
+			margin-bottom: 20px;
+			margin-left: 20px;			
+		}
+		
+		
+		.btn-edit-info {
+			background-color: rgb(2,88,155);
+			border-radius: 10px;
+			color: white;
+		}
+		.btn-edit-info:hover {
+			color: rgb(182,232,241)
+		}
+		
+		.flex-grow-2 {
+			display: flex;
+		    justify-content: right;
+		    align-items: center;
+		    margin-top: 30px;
+		}
+		.frame-description {
+			background-color: white;
+    		border-radius: 20px;
+    		margin-top: 20px;
+		}
+		.frame-description:hover {
+			background-color:azure
+		}
+		
+		.row.one {
+			margin-top: 10px;
+			margin-bottom: 10px;
+		}
+		
+		.row.two {
+			margin-top: 10px;
+			margin-bottom: 10px;
+		}
+		.row.third {
+			margin-top: 10px;
+			margin-bottom: 10px;
+		}
+		.row.four {
+			margin-top: 10px;
+			margin-bottom: 10px;
+		}
+		
+		.frame-description-01 {
+			margin-bottom: 20px;			
+		}
+		
+		.card-title {
+    		border-radius: 20px
+		}
+		
+		p.card-text.text-description {
+			font-size: 20px;
+			color: rgb(2,88,155);
+		}
+		.ml-2 {
+			display: flex;
+		    justify-content: right;
+		    margin-right: 15px;
+		}
+		
+		.frame-01 {
+			box-shadow: 0 8px 10px rgb(226, 226, 226);
+		}
+		
+		.frame-description {
+			box-shadow: 0 8px 10px rgb(226, 226, 226);
+		}
+		
+		.material-symbols-outlined.back {
+			color: rgb(2,88,155);
+		}
+		
+		.material-symbols-outlined.back:hover {
+			color: rgb(182,232,241);
+		}
+		
+	</style>
+</head>
+<body>
+	<div th:replace="~{admin/headeradmin :: header}"></div>
+    <div class="container-fluid mb-4">
+    	<div class="container">			
+	        <div class="frame-01">
+				<div class="ml-2" style="justify-content: left; margin: 10px;">
+                    <a th:href="@{/managebooks}" class="btn btn-out" style="margin-top: 15px;">
+						<span class="material-symbols-outlined back">arrow_back_ios</span>
+					</a>
+                </div>
+				<h3>THÔNG TIN SÁCH</h3>			
+		        <div class="frame-02">
+		            <div class="row no-gutters">
+						<div class="col-md-4">
+							<div class="row">
+								<div class="col-md-4">
+				                    <img th:src="${book.bookImages[1].path + '?v=' + randomNumber}" alt="Book Image 1" width="90" style="margin-bottom: 10px;"><br>
+				                    <img th:src="${book.bookImages[2].path + '?v=' + randomNumber}" alt="Book Image 1" width="90" style="margin-bottom: 10px;"><br>
+				                    <img th:src="${book.bookImages[3].path + '?v=' + randomNumber}" alt="Book Image 1" width="90" style="margin-bottom: 10px;"><br>
+				                </div>
+				                <div class="col-md-8">
+				                    <img th:src="${book.bookImages[0].path}" alt="Book Image" class="card-img" style="border-radius: 15px;">
+				                </div>
+							</div>
+						</div>
+		                <div class="col-md-8">
+		                    <div class="card-body">								
+		                        <h5 class="card-title" th:text="${book.name}" style="margin-left: 20px;"></h5>
+		                        <div class="row main" style="margin-right: 250px;">
+									<div class="col" style="margin-left: 20px;" >
+										
+										<div class="row one" style="display: flex; justify-content: center; align-items: center;">
+											<div class="col">
+						                        <p class="card-text">Tác giả:</p>
+											</div>
+											<div class="col">
+												<span th:each="bookauthor : ${book.bookAuthors}" th:text="${bookauthor.author.name}"></span>
+											</div>
+										</div>
+										
+					                    <div class="row two"  style="display: flex; justify-content: left; align-items: center;"> 
+											<div class="col">
+					                        	<p class="card-text" style="display: flex; justify-content: left; align-items: center;">Nhà xuất bản: </p>
+											</div>
+											<div class="col" style="display: flex; justify-content: left; align-items: center;">
+												<span th:text="${book.publisher}"></span>
+											</div>
+					                    </div>
+	
+					                    <div class="row third" style="display: flex; justify-content: center; align-items: center;"> 
+											<div class="col">  
+					                        	<p class="card-text" style="display: flex; justify-content: left; align-items: center;">Số lượng: </p>
+											</div>
+											<div class="col" style="display: flex; justify-content: left; align-items: center;">
+												<span th:text="${book.quantity}"></span>
+											</div>
+					                    </div>
+					                    
+					                    <div class="row four" style="display: flex; justify-content: center; align-items: center;">
+											<div class="col">
+					                        	<p class="card-text" style="display: flex; justify-content: left; align-items: center;">Danh mục:</p>
+											</div>
+											<div class="col" style="display: flex; justify-content: left; align-items: center;">
+												 <span th:text="${book.category.name}"></span>
+											</div>	
+					                    </div>
+					                        									
+				                        	<p class="card-text" style="font-size: 30px; font-weight: bold;text-align: left; color: orangered;"><span th:text="${#numbers.formatInteger(book.sellPrice, 0, 'POINT')}" ></span> đ</p>
+									</div>																		
+		                        </div>
+		                        <div class="d-flex flex-grow-2">
+				                    	<form th:action="@{/addtocart}" method="post">
+				                             <div class="d-flex flex-grow-1">
+                            					<a th:href="@{/updatebook(bookId=${book.id})}" class="btn btn-edit-info">Sửa thông tin</a>
+                            					
+                        					</div>
+				                    	</form>
+				                    </div>
+				                  	<th:block th:switch="${book.status}">
+                            			<div th:case="1" class="alert alert-success"  style="border-radius: 10px; margin-top: 20px;" role="alert">Đang kinh doanh</div>
+                            			<div th:case="0" class="alert alert-danger" style="border-radius: 10px; margin-top: 20px;" role="alert">Ngừng kinh doanh</div>
+                        			</th:block>
+				                </div>		                       	                        
+		                    </div>
+		                </div>
+		            </div>
+		        </div>
+		        <div class="frame-description">	
+					<div class="frame-description-01" style="padding: 20px; font-family: Arial">		
+				        <p class="card-text text-description">Mô tả:</p>
+					    <p class="card-text content" th:text="${book.description}" style="text-align: justify;"></p>
+					</div>
+		       	</div>
+		       	<div class="frame-description">	
+					<div class="frame-description-01" style="padding: 20px; font-family: Arial; margin: 0px;">
+				       	<div class="col" style="padding: 0px;">
+							<p class="card-text" style="color: rgb(2,88,155); font-size: 20px;">Chi tiết:</p>
+					        <pre class="card-text" th:text="${book.detail}" style="font-size: 16px; font-family: Arial;"></pre>
+						</div>
+					</div>
+		       	</div>
+	       	</div>
+	        </div>
+       
+    </div>
+	<!--<div th:replace="~{admin/footeradmin :: footer}"></div>-->
+</body>
+</html>

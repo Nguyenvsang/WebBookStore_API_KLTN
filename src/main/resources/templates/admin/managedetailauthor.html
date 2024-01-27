@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Thông tin tác giả</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" />   
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" /> 
+    <style>
+    body { background-color: #f8f9fa  }
+		
+		th, td { text-align: center; }
+		h3 {
+        	text-align: center;
+        	margin-top: 0px;
+        	margin-bottom: 0px;  
+        	color: rgb(2,88,155);     	
+    } 
+   
+	    .container.main {
+			border: 2px ;
+	        border-radius: 5px;	  
+	        border-radius: 15px;	
+	        padding: 15px;
+	        margin-top: 10px;
+	        margin-bottom: 10px;
+		}
+		
+		.btn-editinfo {
+				background-color: rgb(2,88,155);
+				border-radius: 10px;
+				color: white;
+		}
+		.btn-editinfo:hover {
+			color: rgb(182,232,241)
+		}
+		
+		
+		.card {
+			border: 2px ;
+	        border-radius: 5px;	  
+	        border-radius: 15px;	
+	        padding: 15px;
+	        margin-top: 10px;
+	        margin-bottom: 10px;
+	        margin-left: 300px;
+	        margin-right: 300px;
+		}
+		
+		.frame-body {
+			margin: 30px;
+		}
+		
+		.card {
+		        border-radius: 5px;
+		        padding: 20px;
+		        border-radius: 15px;
+		        margin-top: 50px;			  
+			    margin-bottom: 50px;   
+			}
+			
+		.card {
+			box-shadow: 0 8px 10px rgb(226, 226, 226);
+		}
+		
+		.material-symbols-outlined.back {
+			color: rgb(2,88,155);
+		}
+		
+		.material-symbols-outlined.back:hover {
+			color: rgb(182,232,241);
+		}
+		
+</style>
+</head>
+<body>
+	<div th:replace="~{admin/headeradmin :: header}"></div>
+    <div class="container-fluid mb-4">
+		<div class="container main">        
+        
+        <!-- Hiển thị thông báo nếu có -->
+	    <div th:if="${param.message}" class="alert"
+			th:classappend="${#strings.containsIgnoreCase(param.message, 'thành công') ? 'alert-success' : 'alert-danger'}">
+			<span th:text="${param.message}"></span>
+		</div>
+        
+        <div class="card">
+			<div class="ml-2">
+	            <a th:href="@{/manageauthors}" class="btn btn-out">
+				<span class="material-symbols-outlined back">arrow_back_ios</span>
+				</a>
+	        </div>
+			<h3>THÔNG TIN TÁC GIẢ</h3>
+            <div class="row no-gutters justify-content: center;">
+                <div class="col-md-12 justify-content: center;">
+					<div class="container-body">
+	                   <div class="card-body">                                                
+	                       <p class="card-text mt-4">Mã: <span th:text="${author.id}"></span></p>
+	                       <h6 class="card-title" style="color: rgb(2,88,155);">Tên tác giả: <span th:text="${author.name}"></span></h6>
+	                       <p class="card-text">Tiểu sử:</p>
+	                       <div class="form-control" style="border-radius: 10px; height: 100px; overflow: hidden;">
+							    <pre class="text" th:text="${author.bio}" style="height: 90px;"></pre>
+							</div>
+	                   </div>
+                </div>
+            </div>
+            <div class="d-flex flex-grow-1 justify-content-center" >
+	          	<a th:href="@{/updateauthor(authorId=${author.id})}" class="btn btn-editinfo">Sửa thông tin</a>
+	            	
+	        </div>
+        </div>
+        
+    </div>
+	<!--<div th:replace="~{admin/footeradmin :: footer}"></div>-->
+	<!-- Thêm các tệp tin JavaScript -->
+    <script th:src="@{/js/jquery-3.4.1.slim.min.js}"></script>
+    <script th:src="@{/js/popper.min.js}"></script>
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+</body>
+</html>

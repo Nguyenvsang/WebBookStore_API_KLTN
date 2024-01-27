@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Cập nhật thông tin</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <style> 
+		
+		body { background-color: #f8f9fa  }
+		
+		th, td { text-align: center; } 
+		h3 {
+	        text-align: center;
+	        margin-top: 0px;
+	        margin-bottom: 20px;  
+	        color: rgb(2,88,155);     	
+	    }
+	    .container-body {
+	    	border-radius: 20px;
+	    	margin-left: 250px;
+	    	margin-right: 250px;
+	    	margin-top: 20px;
+	    	margin-bottom: 20px;   		
+		}
+		.frame-body {
+			margin: 30px;
+		}
+		
+		.btn-save {
+				background-color: rgb(2,88,155);
+				border-radius: 10px;
+				color: white;
+				margin-bottom: 20px;
+		}
+		.btn-save:hover {
+			color: rgb(182,232,241)
+		}
+		
+		
+		.container-body {
+			box-shadow: 0 8px 10px rgb(226, 226, 226);
+		}
+		
+		.material-symbols-outlined.back {
+			color: rgb(2,88,155);
+		}
+		
+		.material-symbols-outlined.back:hover {
+			color: rgb(182,232,241);
+		}
+		
+	</style>
+	
+	<script>
+	var loadFile = function(event) {
+	    var output = document.getElementById('output');
+	    output.src = URL.createObjectURL(event.target.files[0]);
+	    output.onload = function() {
+	        URL.revokeObjectURL(output.src) // free memory
+	    }
+	};
+	</script>
+	
+</head>
+<body>
+	<div th:replace="~{admin/headeradmin :: header}"></div>
+    <div class="container">        
+
+        <!-- Hiển thị thông báo nếu có -->
+        <div th:if="${message}" class="alert"
+             th:classappend="${message.contains('thành công') ? 'alert-success' : 'alert-danger'}"
+             th:text="${message}"></div>
+        <div class="container-body" style="background-color: white;"> 
+			<a th:href="@{/managedetailaccount(accountId=${account.id})}" class="btn btn-out" style="margin: 10px;"> 
+				<span class="material-symbols-outlined back">arrow_back_ios</span>
+			</a>
+			<h3>NHẬP THÔNG TIN CẦN CHỈNH SỬA</h3>
+			<div class="frame-body">         
+		        <form th:action="@{/editaccount}" th:object="${account}" method="post" enctype="multipart/form-data">
+				    <div class="form-group">
+				        <label for="id" style="color: rgb(2,88,155);">Mã:</label>
+				        <input type="text" class="form-control" id="id" th:field="*{id}" readonly style="border-radius: 10px;">
+				    </div>
+				    <div class="form-group">
+				        <label for="firstName" style="color: rgb(2,88,155);">Tên:</label>
+				        <input type="text" class="form-control" id="firstName" th:field="*{firstName}" style="border-radius: 10px;" 
+				        pattern="[A-Za-zÀ-ỹ\s]*" title="Chỉ chấp nhận chữ cái và khoảng trắng" required>
+				    </div>
+				    <div class="form-group">
+				        <label for="lastName" style="color: rgb(2,88,155);">Họ:</label>
+				        <input type="text" class="form-control" id="lastName" th:field="*{lastName}" style="border-radius: 10px;"
+				        pattern="[A-Za-zÀ-ỹ\s]*" title="Chỉ chấp nhận chữ cái và khoảng trắng" required>
+				    </div>
+				    <div class="form-group">
+				        <label for="username" style="color: rgb(2,88,155);">Tên người dùng:</label>
+				        <input type="text" class="form-control" id="username" th:field="*{username}" required style="border-radius: 10px;">
+				    </div>
+				    <div class="form-group">
+				        <label for="gender" style="color: rgb(2,88,155);">Giới tính:</label>
+				        <select class="form-control" id="gender" th:field="*{gender}" required style="border-radius: 10px;">
+				            <option value="Nam">Nam</option>
+				            <option value="Nữ">Nữ</option>
+				        </select>
+				    </div>
+				    <div class="form-group">
+				        <label for="image" style="color: rgb(2,88,155);">Đổi hình ảnh:</label>
+				        <input type="file" class="form-control-file" id="image" name="image" accept="image/*" onchange="loadFile(event)" style="margin-bottom: 10px ;">
+				        <div style="display: flex; justify-content: center; align-items: center;">
+						    <img id="output" width="100"/>
+						</div>
+				    </div>
+				    <div class="form-group"> 
+						<label for="dob" style="color: rgb(2,88,155);">Ngày sinh:</label> 
+						<input type="date" class="form-control" id="dob" name="dob" th:value="${#dates.format(account.dateOfBirth, 'yyyy-MM-dd')}" th:attr="placeholder=${#dates.format(account.dateOfBirth, 'dd/MM/yyyy')}" required style="border-radius: 10px;"> 
+					</div>
+				    <div class="form-group">
+				        <label for="address" style="color: rgb(2,88,155);">Địa chỉ:</label>
+				        <input type="text" class="form-control" id="address" th:field="*{address}" required style="border-radius: 10px;">
+				    </div>
+				    <div class="form-group">
+				        <label for="phoneNumber" style="color: rgb(2,88,155);">Số điện thoại:</label>
+				        <input type="tel" class="form-control" id="phoneNumber" th:field="*{phoneNumber}" style="border-radius: 10px;"
+				        pattern="[0-9]*" title="Chỉ chấp nhận số" required>
+				    </div>
+				    <div class="form-group">
+				        <label for="email" style="color: rgb(2,88,155);">Email:</label>
+				        <input type="email" class="form-control" id="email" th:field="*{email}" required style="border-radius: 10px;">
+				    </div>
+				    <div class="form-group">
+					    <label for="accountType" style="color: rgb(2,88,155);">Loại tài khoản:</label>
+					    <output class="form-control" id="accountType" name="accountType" style="border-radius: 10px; background-color: #D3D3D3;">
+					        <span th:if="${account.accountType} == 0">Admin</span>
+					        <span th:if="${account.accountType} == 1">Khách hàng</span>
+					    </output>
+					</div>
+					<div class="form-group">
+					    <label for="status" style="color: rgb(2,88,155);">Trạng thái:</label>
+					    <select class="form-control" id="status" th:field="*{status}" required style="border-radius: 10px;">
+					        <option value="0">Ngừng hoạt động</option>
+					        <option value="1">Đang hoạt động</option>
+					    </select>
+					</div>
+				    <div class="text-center mb-4">
+				        <button type="submit" class="btn btn-save">Lưu</button>
+				        
+				    </div>
+				</form>
+			</div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <!--<div th:replace="~{admin/footeradmin :: footer}"></div>-->
+</body>
+</html>

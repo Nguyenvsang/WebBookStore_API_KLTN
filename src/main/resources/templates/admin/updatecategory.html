@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Chỉnh sửa danh mục</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+	<style> 
+		
+		body { background-color: #f8f9fa  }
+		
+		th, td { text-align: center; } 
+		h3 {
+	        text-align: center;
+	        margin-top: 0px;
+	        margin-bottom: 20px;  
+	        color: rgb(2,88,155);     	
+	    }
+	    .container-body {
+	    	border-radius: 20px;
+	    	margin-left: 250px;
+	    	margin-right: 250px;
+	    	margin-top: 20px;
+	    	margin-bottom: 20px;   		
+		}
+		.frame-body {
+			margin: 30px;
+		}
+		
+		.btn-save {
+				background-color: rgb(2,88,155);
+				border-radius: 10px;
+				color: white;
+				margin-bottom: 20px;
+		}
+		.btn-save:hover {
+			color: rgb(182,232,241)
+		}
+		
+		.material-symbols-outlined.back {
+			color: rgb(2,88,155);
+		}
+		
+		.material-symbols-outlined.back:hover {
+			color: rgb(182,232,241);
+		}
+		
+		.container-body {
+			margin-top: 50px;
+			box-shadow: 0 8px 10px rgb(226, 226, 226);
+		}
+	</style> 
+</head>
+<body>
+	<div th:replace="~{admin/headeradmin :: header}"></div>
+    <div class="container">       
+        
+        <!-- Hiển thị thông báo nếu có -->
+        <div th:if="${param.message}" class="alert"
+		     th:classappend="${#strings.containsIgnoreCase(param.message, 'thành công') ? 'alert-success' : 'alert-danger'}">
+		    <span th:text="${param.message}"></span>
+		</div>
+	    <div class="container-body" style="background-color: white;"> 
+			<a th:href="@{/managecategories}" class="btn btn-out" style="margin: 10px;">
+				<span class="material-symbols-outlined back">arrow_back_ios</span>
+			</a>
+			<h3>CHỈNH SỬA DANH MỤC</h3>
+			<div class="frame-body">   
+		        <form th:action="@{/updatecategory}" method="post">
+		            <div class="form-group">
+		                <label for="id" style="color: rgb(2,88,155);">Mã:</label>
+		                <input type="text" class="form-control" id="id" name="id" th:value="${category.id}" readonly style="border-radius: 10px;">
+		            </div>
+		            <div class="form-group">
+		                <label for="name" style="color: rgb(2,88,155);">Tên danh mục:</label>
+		                <input type="text" class="form-control" id="name" name="name" th:value="${category.name}" required style="border-radius: 10px;">
+		            </div>
+		            
+		            <div class="form-group">
+		                <label for="status" style="color: rgb(2,88,155);">Trạng thái:</label>
+		                <select class="form-control" id="status" name="status" style="border-radius: 10px;">
+		                    <option value="0" th:selected="${category.status == 0}">Ngừng kinh doanh</option>
+		                    <option value="1" th:selected="${category.status == 1}">Đang kinh doanh</option>
+		                </select>
+		            </div>
+		            <div class="text-center mb-4">
+		                <button type="submit" class="btn btn-save">Lưu</button>
+		                
+		            </div>
+		        </form>
+			</div>
+	    </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+	<!--<div th:replace="~{admin/footeradmin :: footer}"></div>-->
+</body>
+
+</html>

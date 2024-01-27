@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Đăng nhập</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+   	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+    <style>
+		
+		body { background-color: #f8f9fa  }
+		
+    .form-container {
+        
+        border-radius: 5px;
+        padding: 20px;
+        border-radius: 15px;
+        margin-top: 20px;
+	    margin-right: 100px;
+	    margin-left: 100px;	 
+	    margin-bottom: 40px;   
+	}
+	.btn-login {
+		background-color: rgb(2,88,155);
+		border-radius: 10px;
+		color: white;
+	}
+	.btn-login:hover {
+			color:rgb(182,232,241); /* Thay đổi màu văn bản khi trỏ chuột vào nút */
+	}
+	h3 {
+		color: rgb(2,88,155);
+		margin-top: 3px;
+		margin-bottom: 15px;
+	}
+	.form-control {
+		border-radius: 10px
+	}
+	
+	.navbar-nav {
+			display: frex;
+		}
+		.navbar-nav-left {
+			width: 70%;
+		}
+		.navbar-nav-right {
+			width: 30%;
+		}
+		.nav-link {
+			display: flex;
+      		align-items: center;
+      		column-gap: 0.5rem;
+      		width: fit-content;
+		}
+		.move-right {
+			margin-left: auto;
+			display: flex;
+			float: right;
+		}
+		.material-symbols-outlined{
+			color: rgb(2,88,155);
+		}
+		
+		.form-container {
+			box-shadow: 0 8px 10px rgb(226, 226, 226);
+		}
+		
+		.row-01{
+			color: rgb(226, 226, 226);
+		}
+		.row-01:hover {
+			color: rgb(2,88,155);
+		}
+		
+	</style>
+	
+</head>
+<body>
+<div th:replace="~{layout/header :: header}"></div>
+<div class="container mt-4 mb-4">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            
+            
+            <!-- Hiển thị thông báo nếu có -->
+            <div th:if="${param.message}" class="alert"
+			     th:classappend="${#strings.containsIgnoreCase(param.message, 'thành công') ? 'alert-success' : 'alert-danger'}">
+			    <span th:text="${param.message}"></span>
+			</div>
+            
+            <div class="form-container" style="background-color: white;">
+				<h3 class="text-center">ĐĂNG NHẬP</h3>
+	            <form th:action="@{/customer/loginaccount}" method="post">
+	                <div class="form-group">
+	                    <label for="username" style="color: rgb(2,88,155);">Tên đăng nhập:</label>
+	                    <input type="text" class="form-control" id="username" name="username" required>
+	                </div>
+	                <div class="form-group" style="margin-bottom: 5px;">
+					    <label for="password" style="color: rgb(2,88,155);">Mật khẩu:</label>
+					    <input type="password" class="form-control" id="password" name="password" required>
+					    <input type="checkbox" id="togglePassword" style="margin-top: 20px;"> Hiển thị mật khẩu
+					</div>	
+														
+	                <a class="row-01" th:href="@{/customer/registeraccount}" style="display: flex; justify-content: left; align-items: left; text-decoration: none; margin-bottom: 15px;" >	
+						<span>Đăng ký</span>
+					</a>		                
+	            
+					
+	                <div class="text-center">
+	                    <button type="submit" class="btn btn-login">Đăng nhập</button>
+	                </div>
+	                              
+	            </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div th:replace="~{layout/footer :: footer}"></div>
+	<script>
+	    var password = document.getElementById('password');
+	    var togglePassword = document.getElementById('togglePassword');
+	
+	    togglePassword.addEventListener('click', function () {
+	        if (password.type === 'password') {
+	            password.type = 'text';
+	        } else {
+	            password.type = 'password';
+	        }
+	    });
+	</script>
+</body>
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Booktopia - Văn thơ Việt Nam</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+        crossorigin="anonymous">
+    <!-- Các thư viện JavaScript cần cho carousel -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+    <!-- Các thư viện Thymeleaf đã được thêm -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+    <style>
+        .custom-bg-green {
+            background-color: lightgreen;
+        }
+        .navbar-nav {
+			display: frex;
+		}
+		.navbar-nav-left {
+			width: 70%;
+		}
+		.navbar-nav-right {
+			width: 30%;
+		}
+		.nav-link {
+			display: flex;
+      		align-items: center;
+      		column-gap: 0.5rem;
+      		width: fit-content;
+		}
+		.move-right {
+			margin-left: auto;
+			display: flex;
+			float: right;
+		}
+		.material-symbols-outlined{
+			color: rgb(2,88,155);
+		}
+    </style>
+</head>
+<body>
+    <div th:replace="~{layout/header :: header}"></div>
+    
+    <!-- Hiển thị thông báo nếu có -->
+    <div th:if="${param.message}" class="alert"
+		th:classappend="${#strings.containsIgnoreCase(param.message, 'thành công') ? 'alert-success' : 'alert-danger'}">
+		<span th:text="${param.message}"></span>
+	</div>
+    
+    <!-- Thymeleaf: Sử dụng th:each để lặp qua các item trong carousel -->
+    <div id="carouselExampleControls" class="carousel slide d-flex" data-ride="carousel" data-interval="3000" data-pause="false">
+        <div class="carousel-inner">
+            <div class="carousel-item active justify-content-center align-items-center">
+                <img src="https://res.cloudinary.com/dylwewmt0/image/upload/v1698856277/PHOTO_LIST/Index/book_01.jpg" class="d-block mx-auto" alt="...">
+            </div>
+            <div class="carousel-item justify-content-center align-items-center">
+                <img src="https://res.cloudinary.com/dylwewmt0/image/upload/v1698856507/PHOTO_LIST/Index/book_02.jpg" class="d-block mx-auto" alt="...">
+            </div>
+            <div class="carousel-item justify-content-center align-items-center">
+                <img src="https://res.cloudinary.com/dylwewmt0/image/upload/v1698856959/PHOTO_LIST/Index/book_03.jpg" class="d-block mx-auto" alt="...">
+            </div>
+            <!-- Thêm các mục carousel-item khác tương tự -->
+        </div>
+        <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
+    
+    <div th:replace="~{layout/footer :: footer}"></div>
+</body>
+</html>

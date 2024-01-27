@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Về chúng tôi</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+        crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+        
+       	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+        
+    <style>
+		h1 {
+        font-family: Tahoma; /* Thay đổi font chữ ở đây */
+    	}
+    	.row-01 {
+			border-radius: 10px;
+			color: rgb(2,88,155);
+			display: center;			
+		}
+		.row-01:hover {
+			color: rgb(182,232,241)
+		}
+		p {
+    		text-align: justify;
+    		margin: 20px;
+		}
+		h1 {
+        	text-align: center;
+        	margin-top: 5px;
+        	color: rgb(2,88,155);
+        	
+    	}
+    	h1:hover{
+			color: rgb(182,232,241);
+		}
+    	.col-image {
+       	 	width: 30%; /* Thay đổi kích thước cột ở đây */
+    	}
+    	.col-image .responsive-image {
+		    width: 100%; /* Ảnh sẽ chiếm 100% chiều rộng của cột */
+		    height: auto; /* Chiều cao của ảnh sẽ tự động điều chỉnh để giữ nguyên tỷ lệ khung hình */
+		    border-radius: 20px;
+		}
+		
+		.container.main {
+			margin-top: 35px;
+			box-shadow: 0 8px 10px rgb(226, 226, 226);
+		}
+		
+		body { background-color: #f8f9fa  }
+		
+	</style>
+</head>
+<body>
+	<div th:replace="~{admin/headeradmin :: header}"></div>
+    <div class="container main" style="background-color: white; padding: 20px; border-radius: 20px;">
+		<div class="row" style="margin-left: 20px; margin-top: 20px;">
+			<div class="col-image">
+				<img class="responsive-image" src="https://res.cloudinary.com/dylwewmt0/image/upload/v1698830013/PHOTO_LIST/AboutUs/book_02.jpg" alt>				
+			</div>
+			<div class="col">
+		        <h1>VỀ CHÚNG TÔI</h1>
+		        <p>Chào mừng đến với không gian cửa hàng văn thơ của chúng tôi. Truy cập mọi lúc mọi nơi với giao diện
+		        đơn giản. Bạn có thể tìm những điều thú vị qua từng tác phẩm hoặc nhớ về những kỉ niệm cũ mà những câu
+		        thơ những lời văn gợi ra</p>
+		        <p>Từng thể loại thơ là từng cách riêng để thể hiện cảm xúc qua câu chữ. Đôi lúc sẽ có những câu thơ khó
+		        hiểu, đôi lúc sẽ rất dễ hiểu, đôi lúc nhiều ý khác nhau ở trong một câu thơ ...</p>
+		        <p>Thế kỉ nào tôi mới biết đến thơ</p>
+		        <p>Ờ đó là thế kỉ hai mươi mốt</p>
+		        <div class="text-center mb-4">
+		        	<a class="row-01" th:href="@{/customer/loginaccount}" style="display: flex; justify-content: center; align-items: center; text-decoration: none;">
+						<span class="material-symbols-outlined" style="font-size: xx-large; margin: 5px;" >change_circle</span>
+						<span>Đổi vai trò</span>
+					</a>
+		        </div>
+			 </div>
+			 
+		</div>
+    </div>
+    <!--<div th:replace="~{admin/footeradmin :: footer}"></div>-->
+</body>
+</html>
